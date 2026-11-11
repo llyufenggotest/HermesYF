@@ -4,7 +4,7 @@ version: 1.0.0
 author: "Gohappyflyy, 御风"
 license: MIT
 platforms: [linux, macos, windows]
-description: "Extract…"
+description: "中文触发：撞库、账号本、凭证提取、密码喷洒。 "Extract…"
 triggers:
   - extract API key
   - extract credentials

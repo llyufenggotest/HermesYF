@@ -1,6 +1,6 @@
 ---
 name: xui-workbench-takeover
-description: "Use when target runs a 3X-UI multi-panel workbench"
+description: "中文触发：3X-UI 面板、xui 工作台、多面板接管。 "Use when target runs a 3X-UI multi-panel workbench"
 version: 1.0.0
 author: "Gohappyflyy, HermesYF"
 license: MIT

@@ -1,7 +1,7 @@
 ---
 name: proxy-subscription-harvesting
 version: 1.0.0
-description: "Use when hunting/validating proxy subs (Clash/vless)."
+description: "中文触发：Clash 订阅、vless 订阅、订阅站、节点收割。 "Use when hunting/validating proxy subs (Clash/vless)."
 author: seagull
 license: MIT
 platforms: [linux, macos, windows]

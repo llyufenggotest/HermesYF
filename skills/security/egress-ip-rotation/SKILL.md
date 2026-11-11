@@ -1,6 +1,6 @@
 ---
 name: egress-ip-rotation
-description: "Use when a target blocks your IP or you spray creds."
+description: "中文触发：IP 被封、换出口、429 限流、出口轮换。 "Use when a target blocks your IP or you spray creds."
 version: 1.0.0
 author: "御风"
 license: MIT

@@ -1,6 +1,6 @@
 ---
 name: frontend-api-recon
-description: "Map a site's API surface and routes without credentials."
+description: "中文触发：前端挖接口、JS 挖 API、接口测绘。 "Map a site's API surface and routes without credentials."
 version: 0.1.0
 author: "trhhubsd (ARTEX), Hermes Agent"
 license: AGPL-3.0
