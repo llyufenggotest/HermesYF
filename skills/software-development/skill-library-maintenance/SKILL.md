@@ -142,7 +142,7 @@ python3 scripts/check_skill_refs.py --json refs.json --all # --all 打印被忽�
 ### 路径写法铁律
 
 - 技能自己的文件 → 技能相对：`scripts/<脚本>.sh`、`references/<文档>.md`
-- 别的技能的文件 → 显式相对：`../whmcs-assessment/scripts/batch_sub_extract.py`（写「XX 技能的 scripts/y」会被当成自己目录下的文件）
+- 别的技能的文件 → 显式相对：`../../skills-local/security/whmcs-assessment/scripts/batch_sub_extract.py`（skills-local 在 git 忽略目录，实际位置不同）（写「XX 技能的 scripts/y」会被当成自己目录下的文件）
 - 仓库/上游项目的文件 → 带前缀：`<hermes-repo>/scripts/run_tests.sh`、`<minisYf-repo>/assets/skills-seed.zip`、`apps/desktop/scripts/eval.mjs`
 - 配置/凭据 → 环境变量，不写死在脚本里（写死就等于把 token 推进仓库）
 
