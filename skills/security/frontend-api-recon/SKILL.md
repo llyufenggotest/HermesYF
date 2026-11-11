@@ -41,6 +41,21 @@ metadata:
 
 ## 执行流程
 
+### 0. 先把所有 JS 爬下来（katana）
+
+```bash
+katana -u https://target -jc -d 5 -proxy "$SOCKS5" -o urls.txt
+# -jc  解析内联/外链 JS 并继续爬它发现的路由
+# -d 5 爬深度（默认 3，接口藏在二级页面时不够）
+
+grep '\.js' urls.txt > js-files.txt
+```
+
+子域也要扫：`cat subs.txt | xargs -P 5 -I{} katana -u {} -jc -d 3 -silent >> urls.txt`。
+
+**JS 里最值钱的四类东西**：硬编码 API key / token / S3 凭证；UI 上看不到的内部接口；泄露越权逻辑的业务代码；第三方服务集成及其凭证。
+
+
 按序执行，前一项未完成不进下一 Phase。
 
 ```
@@ -150,6 +165,36 @@ python3 OUTDIR/build_perm_tree.py OUTDIR/js OUTDIR/ --config OUTDIR/config.json
   这样能直接看出 `setObject` 用的是哪个 encrypt 变体，省掉「解出来是乱码再换密钥重试」的往返。
 - **IDOR 先验证参数是否被接受**：把别人的 `_id` / `userId` / `orderId` 塞进请求体，如果响应回的仍是**你自己**的数据 → 服务端一律从 token 取身份，这个接口没有 IDOR。直接换下一个接口，别换编码/换大小写硬试。
 - **JWT payload 没有权限字段时，爆破与伪造都是负收益**：`{_id,email,iat,exp}` 这种结构下，权限是服务端按库里查 `_id` 算的，爆出密钥、改 alg、或换 `_id` 都不会让你变管理员。动手爆之前先看 payload 里有没有值得伪造的字段，别把整本字典跑完才发現没东西可伪。
+
+## Nuxt / Vue SSR 站：先挖 `window.__NUXT__`
+
+服务端渲染站的入口 HTML 里内联了 `window.__NUXT__`，其中的 `state` 常直接写着后端真域名：
+
+```bash
+curl -s "https://<front>" | python3 -c "
+import sys,re
+s=sys.stdin.read()
+m=re.search(r'state:\\{https:\\u002F\\u002F([^\"]+)',s)
+print(m.group(1).replace('\\u002F','/') if m else 'not found')"
+```
+
+- 前端域名常常只是壳，真后端在**另一个域**（实测：Nuxt 壳站的 `/api/*` 全返 404 HTML，真后端是 bundle 里硬编码的另一个域名；直连壳域名拿不到任何接口）。
+- 拿到 base 后直接打 `/api/...`，别在壳域名上硬试。
+- **同名多域名 = 同一个后端**：FOFA `body="<真后端域名>"` 能一次列出全部镜像站，逐个抓 `__NUXT__` 如果 API base 相同，就是共库——换域名撞库没有增量。
+- **配置类接口常裸奔**：`/api/config/getAll` 这类一次返回全站配置（SMTP 授权码、支付开关、APP 直链、TG 客服、审核词表）。优先打它，收益比扫路径高。
+
+## 撞库前先验证本子对不对口（零成本）
+
+登录接口对「用户不存在」和「密码错」返回不同文案时，用一个**已知存在的账号 + 错密码**做探针即可判定，不必跑全本：
+
+```
+已知账号 + 错密码 → {"msg":"密码不正确"}     ← 账号存在，接口正常
+本子样本 + 任意密码 → {"msg":"账户不正确"}   ← 用户不存在
+```
+
+先跑 1000 条样本，统计有没有出现「密码不正确」：出现 0 次就说明本子跟该站零重叠，跑完几万条也是 0，直接止损换本子。反之才上全量。
+
+并发上限也要先测：机房 IP 20 并发几秒内就被 CF 520 封掉，换家宽池（每条换 IP）10 并发约 240 条/分；先跑 100 条看错误率再定并发。
 
 ## 判定「这个面根本不存在」（止损）
 
