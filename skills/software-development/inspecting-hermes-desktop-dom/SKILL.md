@@ -9,6 +9,7 @@ metadata:
   hermes:
     tags: [desktop, electron, cdp, dom, ui-verification, self-inspection]
     related_skills: [node-inspect-debugger, systematic-debugging, dogfood]
+tier: archive
 ---
 
 # Inspecting the live Hermes desktop DOM

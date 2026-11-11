@@ -10,6 +10,7 @@ metadata:
     tags: [scopesentry, mcp, scanning, assets, recon]
     category: security
     related_skills: [hermesyf-authorized-assessment]
+tier: archive
 ---
 
 # ScopeSentry MCP 使用指南

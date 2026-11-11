@@ -4,6 +4,7 @@ description: "Use when auditing source code"
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Source audit (deterministic static analysis)

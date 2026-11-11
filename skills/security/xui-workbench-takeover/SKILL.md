@@ -1,10 +1,13 @@
 ---
 name: xui-workbench-takeover
-description: "中文触发：3X-UI 面板、xui 工作台、多面板接管。 "Use when target runs a 3X-UI multi-panel workbench"
+description: >-
+  中文触发：3X-UI 面板、xui 工作台、多面板接管。
+  Take over 3X-UI / multi-panel workbench: default creds, weak tokens, panel takeover and node harvesting.
 version: 1.0.0
 author: "Gohappyflyy, HermesYF"
 license: MIT
 platforms: [linux]
+tier: active
 ---
 
 # X-UI Workbench 完整攻陷链路（实战复盘）

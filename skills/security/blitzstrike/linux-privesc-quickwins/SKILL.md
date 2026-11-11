@@ -4,6 +4,7 @@ description: "Use after Linux shell. Quick privesc ladder - caps to root."
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Linux Privesc - Quick Wins Ladder (reusable)

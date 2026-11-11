@@ -4,6 +4,7 @@ description: "Use when you need to know which third-party packages/lib…"
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Dependency audit (SCA)

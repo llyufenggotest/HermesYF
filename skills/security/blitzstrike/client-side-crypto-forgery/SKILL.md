@@ -4,6 +4,7 @@ description: "Use when client JS embeds crypto keys. Forge valid payloads."
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Client-Side Crypto Forgery (reusable)

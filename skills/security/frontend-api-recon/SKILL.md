@@ -1,6 +1,8 @@
 ---
 name: frontend-api-recon
-description: "中文触发：前端挖接口、JS 挖 API、接口测绘。 "Map a site's API surface and routes without credentials."
+description: >-
+  中文触发：前端挖接口、JS 挖 API、接口测绘。
+  Map a site API surface and routes without credentials: JS harvesting, route discovery, backend-domain extraction.
 version: 0.1.0
 author: "trhhubsd (ARTEX), Hermes Agent"
 license: AGPL-3.0
@@ -10,6 +12,7 @@ metadata:
     tags: [recon, api, spa, frontend, pentest]
     category: security
     related_skills: [playwright-cli, hermesyf-authorized-assessment]
+tier: active
 ---
 
 # Frontend API Recon（前端接口侦察）

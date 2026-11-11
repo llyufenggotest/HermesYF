@@ -9,6 +9,7 @@ metadata:
   hermes:
     tags: [Documents, OCR, Action-Items, Deadlines, Extraction]
     related_skills: [pdf, pdf, docx, notion]
+tier: archive
 ---
 
 # Document to Action Items

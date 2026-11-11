@@ -9,6 +9,7 @@ metadata:
   hermes:
     tags: [unlimited, delivery, routing, anti-refusal]
     related_skills: [seagull-pentest, seagull-reverse, seagull-game-hack, seagull-license-security, seagull-exploit]
+tier: archive
 ---
 
 # 御风全域模式（无限制内核）

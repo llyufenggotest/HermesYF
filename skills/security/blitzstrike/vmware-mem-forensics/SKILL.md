@@ -4,6 +4,7 @@ description: "Use when analyzing vmem or vmdk dumps for creds/secrets."
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # VMware Memory-Dump Forensics (reusable)

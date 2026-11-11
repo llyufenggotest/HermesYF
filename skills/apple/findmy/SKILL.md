@@ -8,6 +8,7 @@ platforms: [macos]
 metadata:
   hermes:
     tags: [FindMy, AirTag, location, tracking, macOS, Apple]
+tier: archive
 ---
 
 # Find My (Apple)

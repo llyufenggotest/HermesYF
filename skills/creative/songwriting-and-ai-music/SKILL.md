@@ -14,6 +14,7 @@ triggers:
   - parody song
   - adapting a song
   - AI music generation
+tier: archive
 ---
 
 # Songwriting & AI Music Generation

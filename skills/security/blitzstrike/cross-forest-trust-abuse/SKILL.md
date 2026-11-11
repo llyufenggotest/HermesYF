@@ -4,6 +4,7 @@ description: "Use when two AD forests share a trust. Trust attack ladder."
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Cross-Forest Trust Abuse (reusable)

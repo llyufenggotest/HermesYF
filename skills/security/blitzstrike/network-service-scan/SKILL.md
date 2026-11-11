@@ -4,6 +4,7 @@ description: "Use when 端口与服务扫描：naabu 先扫宽段，nmap 再深�
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Network & service scan

@@ -4,6 +4,7 @@ description: "Use when you need to know what's actually exposed for a…"
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Attack surface recon

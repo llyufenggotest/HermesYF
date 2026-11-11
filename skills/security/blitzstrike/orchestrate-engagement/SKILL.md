@@ -4,6 +4,7 @@ description: "Use when the user asks for a full security engagement"
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Orchestrate an engagement (no-babysitting)

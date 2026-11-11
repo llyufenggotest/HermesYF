@@ -11,6 +11,7 @@ metadata:
     homepage: https://github.com/pimalaya/himalaya
 prerequisites:
   commands: [himalaya]
+tier: archive
 ---
 
 # Himalaya Email CLI

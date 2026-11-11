@@ -9,6 +9,7 @@ metadata:
   hermes:
     tags: [Obsidian, Notes, Markdown, Vault]
     related_skills: []
+tier: archive
 ---
 
 # Obsidian Vault

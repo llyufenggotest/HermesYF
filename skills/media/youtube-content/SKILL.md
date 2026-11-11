@@ -9,6 +9,7 @@ metadata:
   hermes:
     tags: [YouTube, Video, Transcripts, Media]
     related_skills: []
+tier: archive
 ---
 
 # YouTube Content Tool

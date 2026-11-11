@@ -4,6 +4,7 @@ description: "Use when target runs Gitea/GitHub Actions CI runners."
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # CI/CD Runner Abuse — fork-to-exec (reusable)

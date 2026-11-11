@@ -10,6 +10,7 @@ metadata:
     tags: [iMessage, SMS, messaging, macOS, Apple]
 prerequisites:
   commands: [imsg]
+tier: archive
 ---
 
 # iMessage

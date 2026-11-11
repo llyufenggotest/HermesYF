@@ -9,6 +9,7 @@ metadata:
   hermes:
     tags: [design, html, prototype, ux, ui, creative, artifact, deck, motion, design-system]
     related_skills: [design-md, popular-web-designs, excalidraw, architecture-diagram]
+tier: archive
 ---
 
 # Claude Design for CLI/API Agents

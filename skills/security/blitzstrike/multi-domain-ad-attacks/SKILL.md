@@ -4,6 +4,7 @@ description: "Use when attacking across AD domain trust boundaries."
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Cross-domain AD attack chains (forest root <-> child)

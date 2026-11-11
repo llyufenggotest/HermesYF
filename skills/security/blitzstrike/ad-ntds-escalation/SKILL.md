@@ -4,6 +4,7 @@ description: "Use when attacking AD with any foothold. PTH to NTDS ladder."
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # AD Escalation Ladder — foothold to NTDS (reusable)

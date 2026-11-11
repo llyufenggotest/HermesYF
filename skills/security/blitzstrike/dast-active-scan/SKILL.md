@@ -4,6 +4,7 @@ description: "Use for automated black-box scanning of a live target wi…"
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # DAST — automated active scan

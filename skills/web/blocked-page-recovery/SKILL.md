@@ -9,6 +9,7 @@ metadata:
   hermes:
     tags: [Research, Archives, Wayback, Paywall, WAF, Fallback]
     related_skills: [grounded-citations]
+tier: archive
 ---
 
 # Blocked-Page Recovery

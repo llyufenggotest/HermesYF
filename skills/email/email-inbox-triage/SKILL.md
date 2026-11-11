@@ -9,6 +9,7 @@ metadata:
   hermes:
     tags: [Email, Inbox, Triage, Replies, Productivity]
     related_skills: [himalaya, google-workspace]
+tier: archive
 ---
 
 # Email Inbox Triage

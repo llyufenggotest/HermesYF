@@ -11,6 +11,7 @@ metadata:
     category: productivity
     requires_toolsets: [terminal]
     supersedes: [find-nearby]
+tier: archive
 ---
 
 # Maps Skill

@@ -1,6 +1,8 @@
 ---
 name: egress-ip-rotation
-description: "中文触发：IP 被封、换出口、429 限流、出口轮换。 "Use when a target blocks your IP or you spray creds."
+description: >-
+  中文触发：IP 被封、换出口、429 限流、出口轮换。
+  Rotate egress IPs when blocked or rate-limited (429): proxy pools, listener rotation, egress verification. Use when target blocks your IP.
 version: 1.0.0
 author: "御风"
 license: MIT
@@ -9,6 +11,7 @@ metadata:
   hermes:
     tags: [proxy, mihomo, ip-block, egress, rate-limit, waf]
     related_skills: [blitzstrike-workflow, web-hunting, seagull-pentest]
+tier: active
 ---
 
 # 出口 IP 管理与轮换

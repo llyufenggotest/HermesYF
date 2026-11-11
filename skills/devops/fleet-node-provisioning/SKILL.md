@@ -9,6 +9,7 @@ metadata:
   hermes:
     tags: [fleet, vps, provisioning, bbr, deploy, tuning]
     related_skills: [skill-library-maintenance, egress-ip-rotation]
+tier: archive
 ---
 
 # 新节点上线（裸 VPS → 满血 HermesYF 节点）

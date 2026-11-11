@@ -10,6 +10,7 @@ metadata:
     tags: [browser, playwright, automation, scraping, pentest]
     category: web
     related_skills: [frontend-api-recon]
+tier: archive
 ---
 
 # Browser Automation with playwright-cli

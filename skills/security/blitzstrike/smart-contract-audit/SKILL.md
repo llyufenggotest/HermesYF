@@ -4,6 +4,7 @@ description: "Use when you need to audit Solidity/Vyper smart contract…"
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Smart contract audit

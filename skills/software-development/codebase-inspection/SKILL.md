@@ -11,6 +11,7 @@ metadata:
     related_skills: [github]
 prerequisites:
   commands: [pygount]
+tier: archive
 ---
 
 # Codebase Inspection with pygount

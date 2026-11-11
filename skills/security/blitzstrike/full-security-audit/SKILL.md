@@ -4,6 +4,7 @@ description: "Use when the user asks for a full security audit"
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Full security audit

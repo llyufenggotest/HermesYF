@@ -4,6 +4,7 @@ description: "Use for the vulnerability classes automated scanners str…"
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Business logic & fuzzing

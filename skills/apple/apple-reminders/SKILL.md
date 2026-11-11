@@ -10,6 +10,7 @@ metadata:
     tags: [Reminders, tasks, todo, macOS, Apple]
 prerequisites:
   commands: [remindctl]
+tier: archive
 ---
 
 # Apple Reminders

@@ -5,7 +5,7 @@ author: "Gohappyflyy, 御风"
 license: MIT
 platforms: [linux, macos, windows]
 description: Use when 狩猎/批量打站/漏洞情报/战果归档。风哥基础设施狩猎专用。
----
+tier: active---
 
 # 狩猎 Playbook（风哥基础设施专用）
 

@@ -4,7 +4,9 @@ version: 1.0.0
 author: "Gohappyflyy, 御风"
 license: MIT
 platforms: [linux, macos, windows]
-description: "中文触发：撞库、账号本、凭证提取、密码喷洒。 "Extract…"
+description: >-
+  中文触发：撞库、账号本、凭证提取、密码喷洒。
+  Extract credentials from configs, git history, JS files and DB dumps; verify and grade them. Use whenever credentials are found.
 triggers:
   - extract API key
   - extract credentials
@@ -23,6 +25,7 @@ triggers:
 role: specialist
 scope: analysis
 output-format: json
+tier: active
 ---
 
 # Credential Extraction

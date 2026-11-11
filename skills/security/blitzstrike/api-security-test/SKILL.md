@@ -4,6 +4,7 @@ description: "Use when testing a REST or GraphQL API specifically"
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # API security test

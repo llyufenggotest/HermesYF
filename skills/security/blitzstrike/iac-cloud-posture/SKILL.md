@@ -4,6 +4,7 @@ description: "Use when you need to check Terraform/CloudFormation/Kube…"
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # IaC & cloud posture

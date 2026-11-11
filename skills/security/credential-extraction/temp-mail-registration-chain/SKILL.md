@@ -9,7 +9,7 @@ metadata:
   hermes:
     tags: [registration, temp-mail, moakt, verification-code, account-harvest]
     related_skills: [seagull-pentest, proxy-subscription-harvesting]
----
+tier: active---
 
 # 临时邮箱批量注册收割链
 

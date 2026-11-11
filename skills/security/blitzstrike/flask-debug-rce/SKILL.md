@@ -4,6 +4,7 @@ description: "Use when a Flask/Werkzeug app runs with debug=True"
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Flask / Werkzeug Debug Mode → RCE (source disclosure FIRST, then PIN)

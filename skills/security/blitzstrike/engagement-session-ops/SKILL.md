@@ -4,6 +4,7 @@ description: "Use when 开新靶场/新目标会话：VPN、可达性、工作�
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Engagement Session Ops — standard opening (reusable)

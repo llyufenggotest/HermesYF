@@ -9,6 +9,7 @@ metadata:
   hermes:
     tags: [debugging, python, pdb, debugpy, breakpoints, dap, post-mortem]
     related_skills: [systematic-debugging, node-inspect-debugger]
+tier: archive
 ---
 
 # Python Debugger (pdb + debugpy)

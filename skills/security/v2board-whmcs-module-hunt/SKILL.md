@@ -8,6 +8,7 @@ metadata:
   hermes:
     tags: [pentest, v2board, whmcs, airport, git-leak]
     related_skills: [whmcs-assessment, xboard-airport-pentest]
+tier: archive
 ---
 
 # v2board WHMCS 模块：同类洞狩猎

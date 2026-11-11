@@ -4,6 +4,7 @@ description: "Use when you have a hypothesis and need to prove it is a…"
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Verify a finding (marker + negative control)

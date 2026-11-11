@@ -4,6 +4,7 @@ description: "Use when a target distributes software packages for exec."
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Code Execution via Software-Distribution Channels (reusable)

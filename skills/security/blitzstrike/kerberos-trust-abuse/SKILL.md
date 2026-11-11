@@ -4,6 +4,7 @@ description: "Use when Kerberos, trusts, or MIT krb5 on Linux. Escalation."
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Kerberos & Trust Abuse — Linux MIT krb5 + cross-forest (reusable)

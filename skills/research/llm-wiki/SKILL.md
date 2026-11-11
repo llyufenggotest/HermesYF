@@ -10,6 +10,7 @@ metadata:
     tags: [wiki, knowledge-base, research, notes, markdown, rag-alternative]
     category: research
     related_skills: [obsidian, arxiv]
+tier: archive
 ---
 
 # Karpathy's LLM Wiki

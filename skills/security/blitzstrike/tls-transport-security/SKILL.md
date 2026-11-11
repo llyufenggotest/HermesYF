@@ -4,6 +4,7 @@ description: "Use when you need to check TLS/SSL configuration on a ho…"
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # TLS / transport security

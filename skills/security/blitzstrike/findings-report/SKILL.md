@@ -4,6 +4,7 @@ description: "Use to turn raw output from one or more other skills int…"
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Findings report

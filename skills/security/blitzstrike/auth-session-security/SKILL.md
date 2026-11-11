@@ -4,6 +4,7 @@ description: "Use when testing authentication and session handling spe…"
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Auth & session security

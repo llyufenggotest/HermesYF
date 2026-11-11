@@ -4,6 +4,7 @@ description: "Use before confirming a verified finding as real. Run th…"
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Adversarial review (anti-hallucination gate)

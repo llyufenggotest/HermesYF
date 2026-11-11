@@ -1,7 +1,9 @@
 ---
 name: proxy-subscription-harvesting
 version: 1.0.0
-description: "中文触发：Clash 订阅、vless 订阅、订阅站、节点收割。 "Use when hunting/validating proxy subs (Clash/vless)."
+description: >-
+  中文触发：Clash 订阅、vless 订阅、订阅站、节点收割。
+  Hunt and validate proxy subscription endpoints (Clash/vless), harvest nodes, verify liveness. Use when harvesting proxy subs.
 author: seagull
 license: MIT
 platforms: [linux, macos, windows]
@@ -9,6 +11,7 @@ metadata:
   hermes:
     tags: [proxy, subscription, clash, vless, fofa, recon]
     related_skills: [seagull-pentest, credential-extraction]
+tier: active
 ---
 
 # 代理订阅狩猎与验活

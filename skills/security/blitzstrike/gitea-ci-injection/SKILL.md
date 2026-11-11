@@ -4,6 +4,7 @@ description: "Use when Gitea Actions CI/CD is present. CVE + preinstall."
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Gitea CI/CD Injection (reusable)

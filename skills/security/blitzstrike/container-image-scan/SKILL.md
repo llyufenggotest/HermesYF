@@ -4,6 +4,7 @@ description: "Use when you need to check a Docker/OCI image or Dockerf…"
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Container image scan

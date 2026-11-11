@@ -9,6 +9,7 @@ metadata:
   hermes:
     tags: [Weekly-Review, Planning, Tasks, Calendar, Productivity]
     related_skills: [obsidian, notion, airtable, google-workspace, email-inbox-triage]
+tier: archive
 ---
 
 # Weekly Review and Planning

@@ -11,6 +11,7 @@ metadata:
     homepage: https://github.com/steipete/songsee
 prerequisites:
   commands: [songsee]
+tier: archive
 ---
 
 # songsee

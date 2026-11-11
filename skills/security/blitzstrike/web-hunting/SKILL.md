@@ -4,6 +4,7 @@ description: "Use when the target is a LIVE web application or API and…"
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Advanced Web Bug Hunting (live target)

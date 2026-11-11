@@ -9,6 +9,7 @@ metadata:
   hermes:
     tags: [blitzstrike, workflow, tooling, mcp]
     related_skills: [seagull-pentest, web-app-pentest, aspnet-webforms-panel-pentest]
+tier: archive
 ---
 
 # BlitzStrike 工具编排

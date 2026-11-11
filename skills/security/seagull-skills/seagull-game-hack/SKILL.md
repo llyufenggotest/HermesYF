@@ -5,6 +5,7 @@ version: 1.0.0
 author: "Gohappyflyy (原 laoshu666), HermesYF 修复版"
 license: MIT
 platforms: [linux, macos, windows]
+tier: archive
 ---
 
 # Seagull Game Hack Development Skill

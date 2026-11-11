@@ -19,6 +19,7 @@ metadata:
       - /docs/guides/microsoft-graph-app-registration
       - /docs/user-guide/messaging/teams-meetings
       - /docs/guides/operate-teams-meeting-pipeline
+tier: archive
 ---
 
 # Teams Meeting Pipeline

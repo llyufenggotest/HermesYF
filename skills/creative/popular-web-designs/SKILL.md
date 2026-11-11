@@ -16,6 +16,7 @@ triggers:
   - landing page
   - dashboard design
   - website styled like
+tier: archive
 ---
 
 # Popular Web Designs

@@ -11,6 +11,7 @@ metadata:
     related_skills: [obsidian]
 prerequisites:
   commands: [memo]
+tier: archive
 ---
 
 # Apple Notes

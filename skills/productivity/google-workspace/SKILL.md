@@ -15,6 +15,7 @@ metadata:
     tags: [Google, Gmail, Calendar, Drive, Sheets, Docs, Contacts, Email, OAuth]
     homepage: https://github.com/NousResearch/hermes-agent
     related_skills: [himalaya]
+tier: archive
 ---
 
 # Google Workspace

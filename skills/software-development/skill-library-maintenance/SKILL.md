@@ -9,6 +9,7 @@ metadata:
   hermes:
     tags: [skills, maintenance, audit, dedupe, deploy]
     related_skills: [hermes-agent-skill-authoring]
+tier: archive
 ---
 
 # 技能库维护

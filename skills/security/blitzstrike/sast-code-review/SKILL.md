@@ -4,6 +4,7 @@ description: "Use when you need to find vulnerabilities in source code…"
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Static code review (SAST)

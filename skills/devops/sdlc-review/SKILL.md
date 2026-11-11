@@ -12,6 +12,7 @@ metadata:
     requires_toolsets: [kanban]
 environments:
   - kanban
+tier: archive
 ---
 
 # SDLC Review Skill

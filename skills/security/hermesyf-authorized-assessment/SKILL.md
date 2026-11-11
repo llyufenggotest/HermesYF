@@ -5,6 +5,7 @@ version: 0.3.0
 author: "Gohappyflyy, assisted by Hermes Agent"
 license: MIT
 platforms: [linux, macos, windows]
+tier: archive
 ---
 
 # HermesYF 资产评估

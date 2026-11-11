@@ -4,6 +4,7 @@ description: "Use when finalizing confirmed findings into a submission…"
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Write the report

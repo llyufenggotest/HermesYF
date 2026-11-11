@@ -4,6 +4,7 @@ description: "Use when you need to check an iOS or Android app build f…"
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Mobile app scan

@@ -12,6 +12,7 @@ metadata:
     tags: [Box, Productivity, Cloud Storage, Collaboration, Metadata, Content Extraction, CLI, SDK]
     related_skills: [google-workspace]
     homepage: https://developer.box.com/
+tier: archive
 ---
 
 # Box

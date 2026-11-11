@@ -5,7 +5,7 @@ version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
 deprecated: "hunt-ssrf 已收敛此技能的全部内容，加载那个"
----
+tier: archive---
 > ⚠️ 本技能已收敛进 `hunt-ssrf`（内容合并/重复）。加载那个，别用这个。
 
 

@@ -11,6 +11,7 @@ metadata:
     category: creative
     homepage: https://github.com/blader/humanizer
     related_skills: [songwriting-and-ai-music]
+tier: archive
 ---
 
 # Humanizer: Remove AI Writing Patterns

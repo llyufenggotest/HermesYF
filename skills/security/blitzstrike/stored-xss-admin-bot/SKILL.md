@@ -4,6 +4,7 @@ description: "Use when admin bot renders user input. Stored XSS to RCE."
 version: 0.1.0
 author: "shinthink (Blitz Strike), Hermes Agent"
 license: MIT
+tier: archive
 ---
 
 # Stored XSS to Admin-Bot to Account Takeover to RCE (reusable)

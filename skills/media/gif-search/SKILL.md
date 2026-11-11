@@ -11,6 +11,7 @@ prerequisites:
 metadata:
   hermes:
     tags: [GIF, Media, Search, Tenor, API]
+tier: archive
 ---
 
 # GIF Search (Tenor API)
