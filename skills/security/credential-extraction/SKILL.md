@@ -26,7 +26,8 @@ role: specialist
 scope: analysis
 output-format: json
 tier: active
----
+---## _head_
+
 
 # Credential Extraction
 
@@ -270,17 +271,7 @@ Important: bare `gpt-5.6` may be rejected by ChatGPT Codex OAuth while `gpt-5.6-
 
 ### Webhook hijacking (full message interception)
 
-Setting a webhook on an attacker-controlled HTTPS server **intercepts ALL future incoming messages** and **disables the bot's backend** (Telegram disables polling when a webhook is active). This is the most powerful escalation from a bot token.
-
-Key technique points:
-- Deploy a Python HTTPS webhook receiver on a pivot VPS as a systemd service (not nohup — nohup processes die on SSH disconnect)
-- Generate self-signed cert with **IP SAN** (`IP.1 = <vps_ip>`)
-- Upload cert via `files={"certificate": ...}` NOT `data={"certificate": ...}` — using `data=` causes SSL verify failure even with correct cert
-- Only ports **80, 88, 443, 8443** are allowed for webhooks (Telegram restriction)
-- If the bot's backend is still running, it will reset the webhook — use a cron guard to re-assert every minute, or kill the backend service
-
-**See `references/telegram-bot-webhook-hijack.md`** for the complete setup: cert generation, systemd service, webhook receiver code, cert upload fix, backend competition handling, error troubleshooting, and message capture format.
-
+> [压缩] 原 62 行 → 完整原文见 references/archived-full.md
 ## Werkzeug/Flask Panel Testing
 
 Exposed VPS often run Flask config panels on ports 8888/8889 (AnyTLS, Sing-box). Test with dump-derived passwords — successful login returns a different response size or sets a session cookie. Check `/console` for Werkzeug debug RCE. See `references/exposed-directory-audit.md` for the full panel testing methodology.

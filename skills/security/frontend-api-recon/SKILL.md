@@ -13,7 +13,8 @@ metadata:
     category: security
     related_skills: [playwright-cli, hermesyf-authorized-assessment]
 tier: active
----
+---## _head_
+
 
 # Frontend API Recon（前端接口侦察）
 
@@ -93,43 +94,8 @@ harvest 会：解析 HTML script → webpack/Vite manifest → 下载全部 lazy
 2. 把所有方法名发一遍，按状态码分三组：**200 = 未授权可达**、**401 = 需凭据**、**404 = 方法不存在**
 3. 未授权组是重点：配置类接口（支付渠道、广告、白名单、站点配置）常常裸奔，且返回体里带其他域名/关联站线索
 
-**登录方法名靠抓不靠猜**：`/login`、`/signin`、`/userLogin` 一律 404 很常见。打开登录弹窗用假账号提交一次，从 post_data 里读真实方法名（实测有 `/sevenVideoUserLogin` 这种）。SPA 的点击必须是真实鼠标事件（Playwright `locator.click()`），`element.click()` 不触发框架绑定事件。
 
-### Phase 1b — 参数逆向
-path 来自 Phase 1；参数字段须单独 recon。锚点扩窗（已知 path 为锚找组包对象）→ 绑定层（表单 submit→transform→API payload）→ 多样本 diff（必填/可选靠 Phase 3 矩阵+diff）。标注 `transport: query|json|form|graphql|encrypted`。
-
-### Phase 2 — 鉴权三道门（写到 config.json）
-
-| 门 | 问题 | 关键词 |
-|---|---|---|
-| 渲染门 | 如何判断已登录？ | `isLogin`/`getToken`/Cookie/localStorage |
-| 拦截器门 | 什么触发跳 `/login`？ | `response_code`/`errno`/axios interceptor |
-| 内容门 | 菜单/权限从哪来？ | `menu`/`permission`/`role`/`acl`/`routes` |
-
-禁止把 localStorage 键名当凭据——须从 chunk/请求链确认。出口：结论落 config.json，改 runtime_harvest.js/preload.js。
-
-### Phase 3 — 运行时
-config.json 设 `runtimeMode: depth|coverage|both`。depth 用 `runtime_harvest.js`（Puppeteer，遍历 routes）；coverage 用 browser + `preload.js`（document-start 注入，点 Tab/弹窗/表格）。
-
-```bash
-cd OUTDIR && npm install && node runtime_harvest.js config.json
-```
-
-验证：`window.__API_RECON_PRELOAD__` 存在；业务 path 不回 `/login`。**参数触发矩阵**（必做）：列表首屏/点搜索/高级筛选/新建编辑/批量导出各录一次，diff 多样本。
-
-### Phase 4 — 权限树还原（模块页空白时触发）
-每路由仅 bootstrap（如 locale）= 内容门未过。链：`role_permissions`(flat codes) + `permissions/all`(tree) → `getResultTree` → `userRouteAuth[CODE].url`。
-
-```bash
-python3 OUTDIR/extract_route_map.py OUTDIR/js OUTDIR/
-python3 OUTDIR/build_perm_tree.py OUTDIR/js OUTDIR/ --config OUTDIR/config.json
-```
-
-更新 config.json 后重跑 Phase 3。
-
-### Phase 5 — 合并报告
-产出：`api_merged.txt`（`METHOD /path [params] [static|runtime|both]`）、`params_merged.json`、`site_map.json`。报告注明 runtimeMode、静态/运行时 API 数、参数置信度、未覆盖模块。
-
+> [压缩] 原 83 行 → 完整原文见 references/archived-full.md
 ## 脚本清单（scripts/ 是模板，复制到 OUTDIR 按目标改）
 - `harvest_static.py` — SPA 静态收割（webpack/Vite chunk manifest 全量下载 + endpoint/route 正则提取）
 - `spider_mpa.py` — MPA 爬取（forms/links/inline API）
