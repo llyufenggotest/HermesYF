@@ -3313,6 +3313,18 @@ class ContextCompressor(SummaryDispatchMixin, PreLlmSkipMixin, MicroCompactionMi
             ceiling = min(ceiling, int(ctx * TAIL_MAX_CONTEXT_FRACTION))
         return max(ceiling, token_budget)
 
+    def _tail_over_budget(self, messages: list[dict[str, Any]], tail_start: int) -> bool:
+        """True when the protected tail is larger than the token budget it is supposed to fit in.
+
+        A >budget tail is the wedge precondition: it means the tokens driving the session over the
+        compression threshold live in the tail, so an empty post-handoff window is a boundary bug,
+        not a genuinely incompressible transcript (#211014)."""
+        if tail_start < 0 or tail_start >= len(messages):
+            return False
+        price = self._tail_row_pricer(messages)
+        total = sum(price(i) for i in range(tail_start, len(messages)))
+        return total > self.tail_token_budget
+
     def _pressure_demote_tail(
         self, result: list[dict[str, Any]], prune_boundary: int, protect_tail_tokens: int,
         call_id_to_tool: dict[str, tuple[str, str]], min_prune_chars: int, spared: range,
@@ -5695,6 +5707,32 @@ Write only the summary body. Do not include any preamble or prefix."""
             messages = self._demote_stale_tail_tools(messages, compress_end)
         scan = self._scan_window_handoffs(messages, compress_start, compress_end, turns_to_summarize)
         turns_to_summarize = scan.turns_to_summarize
+        # Wedge recovery (#211014): the tail walk accepted nothing because an oversized tool row
+        # blew the soft ceiling on the FIRST row it priced, collapsing the window to the handoff row
+        # alone (empty_post_handoff_window below). With a >budget tail there IS compressible material
+        # — it is just sitting in the protected tail. Retry once with the hard token budget (no 1.5x
+        # soft ceiling) and, if that still yields nothing beyond the handoff, a minimal tail floor so
+        # the summarizer gets the turn history instead of arming the 300s structural backoff that
+        # leaves the session wedged over threshold until it rides into the provider hard limit.
+        _wedged = not turns_to_summarize and compress_end <= compress_start + 1 and self._tail_over_budget(messages, compress_end)
+        if _wedged:
+            # The walk's soft-ceiling path cannot help here: an oversized row breaks it on the first
+            # price and both anchors then pin the cut to head_end+1. Shrink the protected tail to the
+            # minimum row floor so the turn history ahead of it becomes summarizable.
+            _retry_floor = max(3, min(self.protect_last_n, _MAX_TAIL_MESSAGE_FLOOR))
+            retry_cut = max(len(messages) - _retry_floor, compress_start + 1)
+            retry_cut = self._align_boundary_backward(messages, retry_cut)
+            if retry_cut > compress_start + 1:
+                if not self.quiet_mode:
+                    logger.info(
+                        "Post-handoff window was empty with an over-budget tail (%d protected rows); "
+                        "shrinking tail to %d rows so compression can progress (#211014)",
+                        len(messages) - compress_end, len(messages) - retry_cut,
+                    )
+                compress_end = retry_cut
+                turns_to_summarize = [m for m in messages[compress_start:compress_end]]
+                scan = self._scan_window_handoffs(messages, compress_start, compress_end, turns_to_summarize)
+                turns_to_summarize = scan.turns_to_summarize
         self._record_compression_regions(
             head_messages=messages[:compress_start], middle_messages=turns_to_summarize, tail_messages=messages[compress_end:],
         )
