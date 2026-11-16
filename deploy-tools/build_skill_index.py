@@ -53,7 +53,19 @@ def parse_front(text: str) -> dict:
     meta = {}
     if not m:
         return meta
-    for line in m.group(1).splitlines():
+    block = m.group(1)
+    # 首选真 YAML 解析：能正确处理 description 的块标量（>- / |）和多行值。
+    # 旧的逐行正则会把这些读成字面量 ">-"，导致索引里 250+ 个技能描述失效。
+    try:
+        import yaml
+
+        loaded = yaml.safe_load(block)
+        if isinstance(loaded, dict):
+            return {str(k): v for k, v in loaded.items()}
+    except Exception:
+        pass
+    # 兜底：逐行解析（YAML 损坏时仍能取出部分字段）
+    for line in block.splitlines():
         km = re.match(r"^([a-zA-Z_]+):\s*(.*)$", line)
         if km:
             meta[km.group(1)] = km.group(2).strip().strip('"').strip("'")
@@ -128,7 +140,9 @@ def main() -> int:
              f"来源 `{root}`，共 {len(items)} 个技能。**接到任务先在这里定位**，别从零摸。", ""]
     order = list(STAGES) + ["其他"]
     for st in order:
-        rows = sorted(by_stage.get(st, []), key=lambda x: x["name"])[:14]
+        # 不截断：早先 [:14] 的写法让每个阶段只露出前 14 个（按字母序），
+        # 结果 300+ 个技能里大部分在索引里根本看不见，"按段对号"形同虚设。
+        rows = sorted(by_stage.get(st, []), key=lambda x: x["name"])
         if not rows:
             continue
         lines.append(f"## {st}（{len(rows)}）")
