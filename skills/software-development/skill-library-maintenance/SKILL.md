@@ -165,6 +165,65 @@ python3 scripts/check_skill_refs.py --json refs.json --all # --all 打印被忽�
 5. **`description` 超 60 字符直接被拒。** `skill_manage(action='create')` 硬性 60 字符上限，触发词要在前 57 字符内自包含，代码里的细节挪进正文。
 6. **正文里写死机器路径。** 技能要跟仓库走，路径写仓库相对形式；交付脚本的绝对路径放正文顶部的「产物路径」小节，不散落在步骤里。
 
+## 索引与 frontmatter 体检（最容易静默失效的一层）
+
+技能「装了」不等于「能被找到」。索引器和 frontmatter 任一坏掉，技能文件本身完好、`skill_view` 也能读，但**检索/对号全线失效**，且没有任何报错。2026-11 一次全链路审计里，这两层加起来影响了 250+ 个技能。
+
+### 体检三件（一条命令看结论）
+
+```bash
+# 1) frontmatter 可解析性（用真 YAML，不要正则）
+python3 - <<'PY'
+import re,glob,yaml
+bad=[]
+for p in glob.glob('/root/.hermes/skills/**/SKILL.md', recursive=True):
+    t=open(p,encoding='utf-8',errors='replace').read()
+    m=re.match(r'^---\s*\n(.*?)\n---', t, re.S)
+    if not m: bad.append((p,'无闭合')); continue
+    try:
+        d=yaml.safe_load(m.group(1))
+        if not isinstance(d,dict) or str(d.get('description','')).strip() in ('','>-','>','|'):
+            bad.append((p,'desc 坏'))
+    except Exception as e: bad.append((p,str(e)[:40]))
+print('坏 frontmatter:', len(bad)); [print(' ', b) for b in bad[:10]]
+PY
+
+# 2) 索引覆盖率：md 里的技能数 / 实际技能数，应当接近 100%
+python3 /root/pentest/build_skill_index.py
+python3 -c "
+import re,json
+t=re.findall(r'^- \`([^\`]+)\`', open('/root/pentest/skill_index.md').read(), re.M)
+d=json.load(open('/root/pentest/skill_index.json'))
+n={r['name'] for v in d['stages'].values() for r in v}
+print(f'md 覆盖 {len(set(t))}/{len(n)}')"
+
+# 3) 互链断链（RELATED ROUTING 里的 ../xxx/SKILL.md）
+```
+
+### 四个已知坑
+
+| 症状 | 根因 | 判据 / 修法 |
+|---|---|---|
+| 技能描述显示成 `>-` | frontmatter 闭合符和值粘连：`tier: active---## _head_`，YAML 从未闭合 | 正则 `^([A-Za-z_]+):\s*(.*?)---$` 命中即拆成 `key: value` + 换行 `---` |
+| 索引里大量描述为空 | 索引器用逐行正则解析 frontmatter，读不了 YAML 块标量（`description: >-`） | 改用 `yaml.safe_load`，异常再回落正则 |
+| 索引里技能大面积缺失 | md 生成时每阶段 `[:14]` 截断，按字母序只露出前 14 个 | 去掉截断；覆盖率应 ≈100% |
+| 互链点了 404 | 写成 `../<category>/<name>/SKILL.md`（多一层），正确是相对当前技能目录 | 建「技能名 → 目录」映射反查，用 `os.path.relpath` 重算 |
+
+**Python 细节坑**：`name.rstrip("/SKILL.md")` 是按**字符集**剥离，不是后缀。`hunt-file-upload` 会被削成 `hunt-file-uploa`，导致按名反查全部落空。用 `m[:-len("/SKILL.md")]` 或 `split("/")[-1]`。
+
+### 索引必须随部署重建
+
+`build_skill_index.py` 不会自己跑。部署脚本里若没有这一步，新机器上 `/root/pentest/skill_index.md` **根本不存在**，而 AGENTS.md 的「按段对号」硬规则依赖它 —— 等于整个索引层失踪。部署脚本尾部要加：
+
+```bash
+if [ -f /root/pentest/build_skill_index.py ]; then
+    python3 /root/pentest/build_skill_index.py >/dev/null 2>&1 \
+        && echo "✓ 技能索引（$(grep -c '^- `' /root/pentest/skill_index.md) 条）"
+fi
+```
+
+验收脚本同步加三项：索引条数 ≥250、frontmatter 全可解析、`kickoff.py` 就位。
+
 ## Verification
 
 - [ ] 部署目录与仓库 SKILL.md 数量相等
