@@ -114,6 +114,37 @@ for b in go nuclei subfinder httpx; do
 done
 
 echo "-----------------------------------------------------------"
+# 技能层健康度：索引可用 + frontmatter 可解析 + kickoff 就位
+if [ -f /root/pentest/skill_index.md ]; then
+  IDXN=$(grep -c '^- `' /root/pentest/skill_index.md 2>/dev/null || echo 0)
+  if [ "$IDXN" -ge 250 ]; then ok "技能索引" "$IDXN 条"; else bad "技能索引" "仅 $IDXN 条（过期或截断）"; fi
+else
+  bad "技能索引" "缺 /root/pentest/skill_index.md（跑 build_skill_index.py）"
+fi
+
+FMBAD=$(python3 - <<'PY' 2>/dev/null
+import re,glob,yaml
+try:
+    import yaml
+except ImportError:
+    print(0); raise SystemExit
+n=0
+for p in glob.glob('/root/.hermes/skills/**/SKILL.md', recursive=True):
+    t=open(p,encoding='utf-8',errors='replace').read()
+    m=re.match(r'^---\s*\n(.*?)\n---', t, re.S)
+    if not m: n+=1; continue
+    try:
+        d=yaml.safe_load(m.group(1))
+        if not isinstance(d,dict) or str(d.get('description','')).strip() in ('','>-','>','|'): n+=1
+    except Exception: n+=1
+print(n)
+PY
+)
+if [ "${FMBAD:-0}" -eq 0 ]; then ok "技能 frontmatter" "全部可解析"; else bad "技能 frontmatter" "$FMBAD 个损坏"; fi
+
+if [ -f /root/pentest/kickoff.py ]; then ok "kickoff.py" "就位"; else bad "kickoff.py" "缺（AGENTS.md 硬规则依赖）"; fi
+
+echo "-----------------------------------------------------------"
 echo "结果: PASS=$PASS FAIL=$FAIL WARN=$WARN"
 [ "$FAIL" -eq 0 ] && echo "验收通过" || echo "验收未通过，看上面 [FAIL]"
 exit "$FAIL"

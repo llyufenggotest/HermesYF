@@ -7,7 +7,7 @@
 
 用法：
     python3 /root/pentest/kickoff.py example.com
-    python3 /root/pentest/kickoff.py example.com 饿饭 饿饭云     # 带别名
+    python3 /root/pentest/kickoff.py example.com 别名一 别名二     # 带别名
 
 输出三段：
   1. 技能匹配      —— 按关键词命中技能库里的 name / description / 正文
@@ -63,8 +63,14 @@ def keywords(target, aliases):
         a = a.strip()
         if a:
             parts.add(a.lower())
-    return sorted({p for p in parts
-                   if len(p) >= 4 and p not in STOPWORDS},
+    # 中文词放宽：含 CJK 的 ≥2 字即可（英文/域名仍要 ≥4）
+    def keep(s):
+        if s in STOPWORDS:
+            return False
+        if re.search(r"[一-鿿]", s):
+            return len(s.replace(" ", "")) >= 2
+        return len(s) >= 4
+    return sorted({p for p in parts if keep(p)},
                   key=len, reverse=True)
 
 
@@ -81,9 +87,14 @@ def scan_skills(kws):
         except Exception:
             continue
         low = body.lower()
-        # 抽出 frontmatter 里的 description
+        # 抽出 frontmatter 里的 description + 中文触发词（triggers_zh）
         m = re.search(r"^description:\s*(.+)$", body, re.M)
         desc = (m.group(1) if m else "").lower()
+        mtier = re.search(r"^tier:\s*(\w+)", body, re.M)
+        tier = mtier.group(1) if mtier else "active"
+        mzh = re.search(r"^triggers_zh:\s*[\"']?([^\"'\n]+)", body, re.M)
+        if mzh:
+            desc += " " + mzh.group(1).lower()
         score, where = 0, []
         for k in kws:
             if k in name:
@@ -99,17 +110,34 @@ def scan_skills(kws):
         if score:
             hits[name] = {"path": path, "score": score,
                           "where": ",".join(dict.fromkeys(where)),
-                          "desc": extract_desc(body)}
-    # 只留分数像样的，名称/描述命中优先
-    return sorted(((n, i) for n, i in hits.items() if i["score"] >= 3),
-                  key=lambda x: -x[1]["score"])
+                          "desc": extract_desc(body), "tier": tier}
+    # 只留分数像样的，名称/描述命中优先；archive 层命分打 3 折并显式标注
+    scored = []
+    for n, i in hits.items():
+        if i["score"] < 3:
+            continue
+        if i.get("tier") == "archive":
+            i = dict(i, score=max(1, i["score"] // 3), tier_tag="[档案]")
+        else:
+            i = dict(i, tier_tag="")
+        scored.append((n, i))
+    # 排序：active 且非 deprecated 在前，再 archive，最后 deprecated；同层按分数
+    import os as _os
+    def _rank(item):
+        n, i = item
+        path = i.get("path", "")
+        is_dep = "deprecated:" in open(path, encoding="utf-8", errors="ignore").read() if path else False
+        layer = 0 if i.get("tier", "active") == "active" and not is_dep else (1 if not is_dep else 2)
+        return (layer, -i["score"])
+    return sorted(scored, key=_rank)
 
 
 def extract_desc(body):
     m = re.search(r"^description:\s*(.+)$", body, re.M)
-    if not m:
-        return ""
-    d = m.group(1).strip().strip('"').strip("'")
+    d = m.group(1).strip().strip('"').strip("'") if m else ""
+    mzh = re.search(r"^triggers_zh:\s*[\"']?([^\"'\n]+)", body, re.M)
+    if mzh:
+        d = mzh.group(1) + " | " + d
     return d[:95]
 
 
@@ -244,7 +272,9 @@ def _main_impl(argv=None):
         for name, info in sk[:10]:
             star = "★" if info["score"] >= 10 else "·"
             print("  %s %-38s [%s] %s" % (star, name, info["where"], info["desc"]))
-        print("\n  → 命中 %d 个，优先加载得分最高的：skill_view(name='%s')" % (len(sk), sk[0][0]))
+        _tag = sk[0][1].get("tier_tag", "")
+        _hint = "（注意：这是档案层技能，active 层没命中，可能是冷门方向）" if _tag else ""
+        print("\n  → 命中 %d 个%s，优先加载得分最高的：skill_view(name='%s')" % (len(sk), _hint, sk[0][0]))
     else:
         print("  无命中 —— 技能库没有对应打法，按通用流程走")
 

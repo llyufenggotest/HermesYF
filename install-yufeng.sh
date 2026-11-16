@@ -61,6 +61,12 @@ if [ -d "$SRC_TOOLS" ]; then
     chmod +x /root/pentest/*.py 2>/dev/null || true
     t=$(ls -1 /root/pentest/*.py 2>/dev/null | wc -l)
     echo "✓ 运维脚本 → /root/pentest/（$t 个）"
+    # 技能索引必须随部署重建：AGENTS.md 要求「按段对号」，索引缺失或过期就等于没有
+    if [ -f /root/pentest/build_skill_index.py ]; then
+        python3 /root/pentest/build_skill_index.py >/dev/null 2>&1 \
+            && echo "✓ 技能索引 → /root/pentest/skill_index.md（$(grep -c '^- \`' /root/pentest/skill_index.md 2>/dev/null || echo 0) 条）" \
+            || echo "⚠ 技能索引重建失败（skills 未就绪？手工跑 build_skill_index.py）"
+    fi
 fi
 # 部署验收脚本也放一份到 /root/pentest/，日常手工复验不用回仓库找
 if [ -f "$(dirname "$0")/scripts/deploy_check.sh" ]; then
