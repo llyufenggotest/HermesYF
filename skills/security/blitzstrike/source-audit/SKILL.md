@@ -62,3 +62,7 @@ hypothesis. Do not hand-guess; let the tools produce the source→sink evidence.
 
 Every confirmed sink → `finding_create` with the source→sink chain as evidence,
 then `finding_transition` candidate → validated after `verify-finding`.
+
+## Files
+
+- `references/code-audit-playbook.md` — 代码审计实战手册（13KB，从入口点定位到危险函数链路的完整方法）

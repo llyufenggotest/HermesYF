@@ -44,3 +44,11 @@ tier: archive
 ## Notes
 
 - An open port with no vulnerable service behind it still increases attack surface — "close it if it's not needed" is a valid finding even without a CVE attached.
+
+## Files
+
+- `references/gogo-scan.md` — gogo v2 内网自动化扫描（12KB，资产/端口/指纹一体，含结果解析与降噪）
+
+## Files
+
+- `references/fscan-intranet.md` — fscan 内网快速探测（10KB，存活/端口/常见服务爆破，含误报识别）
