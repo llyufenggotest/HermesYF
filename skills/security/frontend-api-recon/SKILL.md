@@ -13,7 +13,8 @@ metadata:
     category: security
     related_skills: [playwright-cli, hermesyf-authorized-assessment]
 tier: active
----## _head_
+
+---
 
 
 # Frontend API Recon（前端接口侦察）

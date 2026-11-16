@@ -186,3 +186,25 @@ into the next follow-up.
 - **Ground a finding in standard IDs for the report** → `taxonomy(web|api|cwe|asvs, ...)`.
 - **Verification** → `verify-finding` skill. **Review** → `adversarial-review`.
 - **The full map** → `doctrine_map` (phase → skill → tools → data).
+
+## Deep decision chains (references/chains-web/)
+
+When a payload gets blocked, a finding looks wrong, or you need to decide *whether to keep pushing or switch class*, read the matching chain doc — each one is a decision tree, not a checklist:
+
+| Situation | File |
+|---|---|
+| Login box, unsure how to attack auth | `references/chains-web/web-auth-bypass.md` |
+| SQLi attempts failing / need to judge injectability | `references/chains-web/web-sqli.md` |
+| Upload blocked by extension/content-type checks | `references/chains-web/web-upload.md` |
+| Serialized data in cookies/params | `references/chains-web/web-deser.md` |
+| SSRF: which internal targets are worth it | `references/chains-web/web-ssrf.md` |
+| SSTI: which engine, which payload class | `references/chains-web/web-ssti.md` |
+| Command injection with/without echo | `references/chains-web/web-cmdi.md` |
+| XXE: in-band vs blind vs OOB | `references/chains-web/web-xxe.md` |
+| Business logic / race / amount tampering | `references/chains-web/web-logic.md` |
+| JWT / token / session forgery | `references/chains-web/web-token-attack.md` |
+| WAF keeps blocking payloads | `references/chains-web/web-waf-bypass.md` |
+| CMS fingerprint → which CVE class | `references/chains-web/web-cms.md` |
+| Have a primitive, need a shell | `references/chains-web/web-to-shell.md` |
+
+Meta-level "should I stop?" decisions → skill `chains-meta`.

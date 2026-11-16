@@ -26,7 +26,8 @@ role: specialist
 scope: analysis
 output-format: json
 tier: active
----## _head_
+
+---
 
 
 # Credential Extraction
