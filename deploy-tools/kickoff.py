@@ -88,8 +88,7 @@ def scan_skills(kws):
             continue
         low = body.lower()
         # 抽出 frontmatter 里的 description + 中文触发词（triggers_zh）
-        m = re.search(r"^description:\s*(.+)$", body, re.M)
-        desc = (m.group(1) if m else "").lower()
+        desc = _front_desc(body).lower()
         mtier = re.search(r"^tier:\s*(\w+)", body, re.M)
         tier = mtier.group(1) if mtier else "active"
         mzh = re.search(r"^triggers_zh:\s*[\"']?([^\"'\n]+)", body, re.M)
@@ -132,9 +131,27 @@ def scan_skills(kws):
     return sorted(scored, key=_rank)
 
 
-def extract_desc(body):
+def _front_desc(body: str) -> str:
+    """取 frontmatter 的 description。
+
+    真 YAML 解析优先：`description: >-` 这种块标量下，旧的逐行正则只能取到 ">-"，
+    导致 179 个技能的描述在匹配时形同不存在（只能靠正文兜）。
+    """
+    try:
+        import yaml as _yaml
+        m = re.match(r"^---\s*\n(.*?)\n---", body, re.S)
+        if m:
+            d = _yaml.safe_load(m.group(1))
+            if isinstance(d, dict) and d.get("description"):
+                return str(d["description"]).strip()
+    except Exception:
+        pass
     m = re.search(r"^description:\s*(.+)$", body, re.M)
-    d = m.group(1).strip().strip('"').strip("'") if m else ""
+    return (m.group(1).strip().strip('"').strip("'") if m else "")
+
+
+def extract_desc(body):
+    d = _front_desc(body)
     mzh = re.search(r"^triggers_zh:\s*[\"']?([^\"'\n]+)", body, re.M)
     if mzh:
         d = mzh.group(1) + " | " + d
