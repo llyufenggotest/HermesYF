@@ -162,13 +162,6 @@ docker run -it --rm sherlock/sherlock <username>
 ### Linux packages
 Available on Debian 13+, Ubuntu 22.10+, Homebrew, Kali, BlackArch.
 
-## Ethical Use
-
-This tool is for legitimate OSINT and research purposes only. Remind users:
-- Only search usernames they own or have permission to investigate
-- Respect platform terms of service
-- Do not use for harassment, stalking, or illegal activities
-- Consider privacy implications before sharing results
 
 ## Verification
 

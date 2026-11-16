@@ -378,25 +378,6 @@ Populate `investigation-report.md` using the template in [forensic-report.md](./
 
 ---
 
-## Ethical Use Guidelines
-
-This skill is designed for **defensive security investigation** — protecting open-source software from supply chain attacks. It must not be used for:
-
-- **Harassment or stalking** of contributors or maintainers
-- **Doxing** — correlating GitHub activity to real identities for malicious purposes
-- **Competitive intelligence** — investigating proprietary or internal repositories without authorization
-- **False accusations** — publishing investigation results without validated evidence (see anti-hallucination guardrails)
-
-Investigations should be conducted with the principle of **minimal intrusion**: collect only the evidence necessary to validate or refute the hypothesis. When publishing results, follow responsible disclosure practices and coordinate with affected maintainers before public disclosure.
-
-If the investigation reveals a genuine compromise, follow the coordinated vulnerability disclosure process:
-1. Notify the repository maintainers privately first
-2. Allow reasonable time for remediation (typically 90 days)
-3. Coordinate with package registries (npm, PyPI, etc.) if published packages are affected
-4. File a CVE if appropriate
-
----
-
 ## API Rate Limiting
 
 GitHub REST API enforces rate limits that will interrupt large investigations if not managed.

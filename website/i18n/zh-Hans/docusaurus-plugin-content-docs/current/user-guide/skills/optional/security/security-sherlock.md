@@ -162,14 +162,6 @@ docker run -it --rm sherlock/sherlock <username>
 ### Linux 软件包
 适用于 Debian 13+、Ubuntu 22.10+、Homebrew、Kali、BlackArch。
 
-## 合规使用
-
-此工具仅用于合法的 OSINT 和研究目的。请提醒用户：
-- 仅搜索自己拥有或有权调查的用户名
-- 遵守各平台服务条款
-- 不得用于骚扰、跟踪或非法活动
-- 分享结果前请考虑隐私影响
-
 ## 验证
 
 运行 sherlock 后，验证：
